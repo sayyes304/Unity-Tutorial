@@ -56,17 +56,19 @@ public class PlayerController : MonoBehaviour
             itemCount++;
 
             Destroy(other.gameObject);
+
+            manger.GetItemCount(itemCount);
         }
 
         if (other.tag == "Finish")
         {
            if(itemCount == manger.TotalItem)
             {
-                SceneManager.LoadScene("Scene2");
+                SceneManager.LoadScene("Scene" + (manger.stage + 2).ToString());
             }
             else
             {
-                SceneManager.LoadScene("Scene1");
+                SceneManager.LoadScene("Scene" + (manger.stage + 1).ToString());
             }
         }
     }
