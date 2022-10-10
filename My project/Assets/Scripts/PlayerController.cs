@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     bool isJump;
 
     public int itemCount;
+
+    public GameManager manger;
 
     AudioSource ScoreSound;
     void Start()
@@ -52,7 +55,19 @@ public class PlayerController : MonoBehaviour
             ScoreSound.Play();
             itemCount++;
 
-            other.gameObject.SetActive(false);
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Finish")
+        {
+           if(itemCount == manger.TotalItem)
+            {
+                SceneManager.LoadScene("Scene2");
+            }
+            else
+            {
+                SceneManager.LoadScene("Scene1");
+            }
         }
     }
 }
